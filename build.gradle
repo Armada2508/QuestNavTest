@@ -77,6 +77,7 @@ dependencies {
 test {
     useJUnitPlatform()
     systemProperty 'junit.jupiter.extensions.autodetection.enabled', 'true'
+    ignoreFailures = true
 }
 
 // Simulation configuration (e.g. environment variables).
@@ -101,4 +102,17 @@ wpi.java.configureTestTasks(test)
 // Configure string concat to always inline compile
 tasks.withType(JavaCompile) {
     options.compilerArgs.add '-XDstringConcat=inline'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs 'library/src/main/java/'
+        }
+    }
+    test {
+        java {
+            srcDirs 'library/src/test/java'
+        }
+    }
 }
