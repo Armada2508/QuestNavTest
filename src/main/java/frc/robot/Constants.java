@@ -1,8 +1,5 @@
 package frc.robot;
 
-import java.io.File;
-import java.io.IOException;
-
 import static edu.wpi.first.units.Units.Amps;
 import static edu.wpi.first.units.Units.Degrees;
 import static edu.wpi.first.units.Units.DegreesPerSecond;
@@ -15,13 +12,18 @@ import static edu.wpi.first.units.Units.MetersPerSecond;
 import static edu.wpi.first.units.Units.RadiansPerSecond;
 import static edu.wpi.first.units.Units.Second;
 import static edu.wpi.first.units.Units.Seconds;
-import static edu.wpi.first.units.Units.Volts;
+import java.io.File;
+import java.io.IOException;
+import org.json.simple.parser.ParseException;
 
 import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
+import com.pathplanner.lib.config.PIDConstants;
+import com.pathplanner.lib.config.RobotConfig;
 
 import edu.wpi.first.math.Pair;
 import edu.wpi.first.math.geometry.Transform2d;
 import edu.wpi.first.math.trajectory.TrapezoidProfile;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.units.LinearAccelerationUnit;
 import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.units.measure.AngularAcceleration;
@@ -31,7 +33,6 @@ import edu.wpi.first.units.measure.LinearAcceleration;
 import edu.wpi.first.units.measure.LinearVelocity;
 import edu.wpi.first.units.measure.Time;
 import edu.wpi.first.wpilibj.Filesystem;
-import frc.robot.lib.util.RangeTransformer;
 
 public class Constants {
 
@@ -106,8 +107,6 @@ public static final Angle halfTurn = Degrees.of(180);
         // Larger number = faster rate of change, limit is in units of (units)/second. In this case the joystick [-1, 1].
         public static final Pair<Double, Double> translationAccelLimits = Pair.of(1.25, 2.0); 
         public static final Pair<Double, Double> rotationAccelLimits = Pair.of(1.0, 2.0);
-        public static final double elevatorAccelScaling = 0.5; // Acceleration is halved when elevator is at max height
-        public static final RangeTransformer elevatorAccelTransformer = new RangeTransformer(ElevatorK.minHeight.in(Inches), ElevatorK.maxHeight.in(Inches), 1, elevatorAccelScaling, true);
 
         public static final double driveSpeedModifier = 1;
         public static final double rotationSpeedModifier = 1;
