@@ -1,4 +1,4 @@
-package frc.robot.subsytems;
+package frc.robot.subsystems;
 
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.geometry.Pose2d;
