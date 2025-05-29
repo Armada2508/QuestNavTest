@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -15,6 +17,14 @@ public class Robot extends TimedRobot {
   @Override
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
+  }
+
+  /**
+    * Returns the alliance
+    * @return true if the robot is on Red, false if the robot is on Blue
+    */
+  public static boolean onRedAlliance() {
+      return DriverStation.getAlliance().orElse(Alliance.Blue) == Alliance.Red;
   }
 
 }
