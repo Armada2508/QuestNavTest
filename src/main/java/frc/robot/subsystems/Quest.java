@@ -5,12 +5,18 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
-import edu.wpi.first.units.measure.Angle;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.QuestNav;
 import frc.robot.Constants.QuestK;
 
 public class Quest extends SubsystemBase {
+    // public record QuestData(
+        // double batteryPercent,
+        // double timestamp,
+        // Pose3d pos
+        //~ Maybe finish this? see how much we need it
+    // ) {}
+
      QuestNav quest = new QuestNav();
 
     @Override
