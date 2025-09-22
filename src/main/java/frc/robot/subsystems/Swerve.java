@@ -13,6 +13,8 @@ import java.util.function.BooleanSupplier;
 import java.util.function.DoubleSupplier;
 import java.util.function.Supplier;
 
+import org.photonvision.EstimatedRobotPose;
+
 import com.ctre.phoenix6.SignalLogger;
 import com.ctre.phoenix6.controls.VoltageOut;
 import com.ctre.phoenix6.hardware.Pigeon2;
@@ -127,7 +129,15 @@ public class Swerve extends SubsystemBase { // physicalproperties/conversionFact
     public void periodic() {
         SmartDashboard.putNumber("X setpoint", xController.getSetpoint().position);
         SmartDashboard.putNumber("Y setpoint", yController.getSetpoint().position);
-        // swerveDrive.addVisionMeasurement(pose.estimatedPose.toPose2d(), pose.timestampSeconds, result.getSecond());
+        for (var result : visionSource.get().results()) {
+            EstimatedRobotPose pose = result.getFirst();
+            if (!initializedOdometryFromVision) {
+                resetOdometry(pose.estimatedPose.toPose2d());
+                initializedOdometryFromVision = true;
+                continue;
+            }
+            swerveDrive.addVisionMeasurement(pose.estimatedPose.toPose2d(), pose.timestampSeconds, result.getSecond());
+        }
     }
 
     private void setupPathPlanner() {
